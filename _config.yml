@@ -33,6 +33,16 @@ github_username: pbinkley
 theme: minima
 plugins:
   - jekyll-feed
+header_pages:
+  - verses.md
+
+page_gen-dirs: true # uncomment, if you prefer to generate named folders
+
+page_gen:
+  - data: 'versdiff'
+    template: 'verse'
+    name: 'id'
+    dir: ''
 
 # Exclude from processing.
 # The following items will not be processed, by default.
