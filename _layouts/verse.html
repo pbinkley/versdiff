@@ -1,1 +1,43 @@
-<h1>{{page.text}}</h1>
+---
+title: {{ page.text }}
+layout: page
+---
+<p class="text">{{ page.text | replace: "/", "<br/>" }}</p>
+
+{% assign sources = page.source | split: ";" %}
+<p><strong>Sources:</strong>
+  {% for source in sources %}
+    {% assign parts = source | split: " " %}
+    {% for part in parts %}
+      {% if forloop.first %}
+        <a href="/sources/{{ part | slugify }}/">{{ part }}</a>
+      {% else %}
+        {{ part }}
+      {% endif %}
+    {% endfor %}
+    {% unless forloop.last %}; {% endunless %}
+  {% endfor %}
+</p>
+
+{% if page.walther %}
+  {% assign walthers = page.walther | split: ";" %}
+  <p><strong>Walther no.:</strong> 
+  {% for walther in walthers %}
+    {% assign cleanwalther = walther | strip %}
+    {{ cleanwalther }}{% unless forloop.last %}; {% endunless %}
+  {% endfor %}
+  </p>
+{% endif %}
+
+{% if page.genre != '' %}
+  <p><strong>Genre:</strong> <a href="/genres/{{ page.genre | slugify }}/">{{ page.genre }}</a></p>
+{% endif %}
+
+{% assign terms = page.term | split: ";" %}
+
+<p><strong>Terms:</strong>
+  {% for term in terms %}
+    {% assign cleanterm = term | strip %}
+    <a href="/terms/{{ cleanterm | slugify }}/">{{ cleanterm }}</a>{% unless forloop.last %},{% endunless %}
+  {% endfor %}
+</p>

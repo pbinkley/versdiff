@@ -35,6 +35,7 @@ plugins:
   - jekyll-feed
 header_pages:
   - verses.md
+  - about.md
 
 page_gen-dirs: true # uncomment, if you prefer to generate named folders
 
