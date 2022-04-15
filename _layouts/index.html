@@ -1,0 +1,9 @@
+---
+layout: page
+---
+
+<ul>
+  {% for item in site.data[page.data] %}
+    <li><a href="/tags/{{ item[0] | slugify }}/">{{ item[0] }}</a></li>
+  {% endfor %}
+</ul>
