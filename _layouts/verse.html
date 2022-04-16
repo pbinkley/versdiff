@@ -2,7 +2,7 @@
 title: {{ page.text }}
 layout: page
 ---
-<p class="text">{{ page.text | replace: "/", "<br/>" }}</p>
+<p class="verse">{{ page.text | replace: "/", "<br/>" }}</p>
 
 {% assign authorizedsources = "Acc,Aimericus,Doctrinale,Gra,Graec,Rad,Serlo,Siguinus,Tra" | split: "," %}
 
@@ -23,7 +23,7 @@ layout: page
 
 {% if page.walther %}
   {% assign walthers = page.walther | split: ";" %}
-  <p><strong>Walther no.:</strong> 
+  <p><strong>Walther no.:</strong>
   {% for walther in walthers %}
     {% assign cleanwalther = walther | strip %}
     {{ cleanwalther }}{% unless forloop.last %}; {% endunless %}

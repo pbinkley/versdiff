@@ -18,12 +18,9 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Versus differenciales
+title: Versus differentiales
 email: peter.binkley@gmail.com
-description: >- # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
+description: Medieval mnemonic verses to distinguish Latin homonyms by the quantity of the penultimate syllable
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://versdiff.wallandbinkley.com" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: pabinkley
@@ -34,9 +31,9 @@ theme: minima
 plugins:
   - jekyll-feed
 header_pages:
-  - verses.md
   - sources.md
-  - about.md
+  - verses.md
+  - terms.md
 
 page_gen-dirs: true # uncomment, if you prefer to generate named folders
 
@@ -53,10 +50,6 @@ page_gen:
     template: 'tag'
     name: 'tag'
     title: 'title'
-    dir: 'tag'
-  - data: 'genres'
-    template: 'tag'
-    name: 'tag'
     dir: 'tag'
 
 # Exclude from processing.
