@@ -3,7 +3,7 @@ layout: page
 ---
 
 <ul>
-  {% for item in site.data[page.data] %}
-    <li><a href="/tag/{{ item[0] | slugify }}/">{{ item[0] }}</a></li>
+  {% for verse in site.data[page.data] %}
+    {% include verse.html verse=verse %}
   {% endfor %}
 </ul>
