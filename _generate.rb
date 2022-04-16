@@ -2,9 +2,11 @@
 
 require 'csv'
 require 'json'
+require 'yaml'
 require 'byebug'
 
 data = CSV.read('_data/versdiff.csv', headers: true)
+@sourcemetadata = YAML.load_file('_data/sourcemetadata.yaml')
 
 @terms = {}
 @genres = {}
@@ -23,8 +25,18 @@ end
 
 def saveData(data, filename)
   keys = data.keys.sort_by(&:downcase)
-  output = [] 
-  keys.each { |key| output << { tag: key, verses: data[key] } }
+  output = []
+  keys.each do |key|
+    entry = { tag: key, verses: data[key] }
+    byebug if key == 'Doct'
+    if filename == 'sources'
+      puts key
+      source = @sourcemetadata.find { |s| s['tag'] == key }
+      entry['title'] = source['display'] ? source['display'] : source['tag']
+      entry['citation'] = source['citation']
+    end
+    output << entry
+  end
   File.write("_data/#{filename}.json", JSON.dump(output))
 end
 
