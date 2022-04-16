@@ -10,7 +10,7 @@ data = CSV.read('_data/versdiff.csv', headers: true)
 @genres = {}
 @sources = {}
 
-AUTHORIZEDSOURCES = ['Acc', 'Aimericus', 'Doctrinale', 'Gra', 'Graec.', 'Rad', 'Serlo', 'Siguinus', 'Tra']
+AUTHORIZEDSOURCES = ['Acc', 'Aimericus', 'Doctrinale', 'Gra', 'Graec', 'Rad', 'Serlo', 'Siguinus', 'Tra']
 
 def gather(str, id, storage)
   units = str.split(';')
@@ -23,8 +23,8 @@ end
 
 def saveData(data, filename)
   keys = data.keys.sort_by(&:downcase)
-  output = {}
-  keys.each { |key| output[key] = data[key] }
+  output = [] 
+  keys.each { |key| output << { tag: key, verses: data[key] } }
   File.write("_data/#{filename}.json", JSON.dump(output))
 end
 
@@ -44,8 +44,11 @@ data.each do |row|
 end
 
 # save data files
+puts 'Saving terms'
 saveData(@terms, 'terms')
+puts 'Saving genres'
 saveData(@genres, 'genres')
+puts 'Saving sources'
 saveData(@sources, 'sources')
 
 puts 'done'

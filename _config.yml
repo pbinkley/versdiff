@@ -44,6 +44,18 @@ page_gen:
     template: 'verse'
     name: 'id'
     dir: ''
+  - data: 'terms'
+    template: 'tag'
+    name: 'tag'
+    dir: 'tag'
+  - data: 'sources'
+    template: 'tag'
+    name: 'tag'
+    dir: 'tag'
+  - data: 'genres'
+    template: 'tag'
+    name: 'tag'
+    dir: 'tag'
 
 # Exclude from processing.
 # The following items will not be processed, by default.
