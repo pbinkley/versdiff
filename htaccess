@@ -2,3 +2,4 @@
 permalink: .htaccess
 ---
 Redirect gone /wp-content/plugins/social-graph-protocol/index.php
+Redirect 301 /about/ /
