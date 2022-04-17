@@ -6,7 +6,7 @@ layout: page
 <ul>
 {% for verseid in page.verses %}
  {% assign verse = site.data.versdiff | find: "id", verseid %}
- <li><a href="/{{ verse.id }}/">{{ verse.id }}</a>: {{ verse.text }}</li>
+ <li><a href="{{ site.baseurl }}/{{ verse.id }}/">{{ verse.id }}</a>: {{ verse.text }}</li>
 {% endfor %}
 </ul>
 

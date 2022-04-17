@@ -8,6 +8,6 @@ layout: page
   <dt><strong>{{ source.display }}</strong>
   </dt>
   <dd>{{ source.citation }}</dd>
-  {% if source.tag %}<a href="/tag/{{ source.tag | slugify }}/">&gt; See verses</a><br/><br/>{% endif %}
+  {% if source.tag %}<a href="{{ site.baseurl }}/tag/{{ source.tag | slugify }}/">&gt; See verses</a><br/><br/>{% endif %}
 {% endfor %}
 </dl>

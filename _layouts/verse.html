@@ -12,7 +12,7 @@ layout: page
     {% assign parts = source | split: " " %}
     {% for part in parts %}
       {% if authorizedsources contains part and forloop.first %}
-        <a href="/tag/{{ part | slugify }}/">{{ part }}</a>
+        <a href="{{ site.baseurl }}/tag/{{ part | slugify }}/">{{ part }}</a>
       {% else %}
         {{ part }}
       {% endif %}
@@ -32,7 +32,7 @@ layout: page
 {% endif %}
 
 {% if page.genre != '' %}
-  <p><strong>Genre:</strong> <a href="/tag/{{ page.genre | slugify }}/">{{ page.genre }}</a></p>
+  <p><strong>Genre:</strong> <a href="{{ site.baseurl }}/tag/{{ page.genre | slugify }}/">{{ page.genre }}</a></p>
 {% endif %}
 
 {% assign terms = page.term | split: ";" %}
@@ -40,6 +40,6 @@ layout: page
 <p><strong>Terms:</strong>
   {% for term in terms %}
     {% assign cleanterm = term | strip %}
-    <a href="/tag/{{ cleanterm | slugify }}/">{{ cleanterm }}</a>{% unless forloop.last %},{% endunless %}
+    <a href="{{ site.baseurl }}/tag/{{ cleanterm | slugify }}/">{{ cleanterm }}</a>{% unless forloop.last %},{% endunless %}
   {% endfor %}
 </p>

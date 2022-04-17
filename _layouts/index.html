@@ -5,7 +5,7 @@ layout: page
 <ul>
   {% for item in site.data[page.data] %}
     <li>
-      <a href="/tag/{{ item.tag | slugify }}/">{{ item.tag }}</a>
+      <a href="{{ site.baseurl }}/tag/{{ item.tag | slugify }}/">{{ item.tag }}</a>
       ({{ item.verses.size }} verse{% if item.verses.size > 1 %}s{% endif %})
     </li>
   {% endfor %}
