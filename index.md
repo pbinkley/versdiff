@@ -11,7 +11,7 @@ Si dubius fueris, hoc lege! Tutus eris.<sup>*</sup></p>
 
 Such verses are particularly valuable for three-syllable words, since a short middle syllable throws the stress back to the first syllable:
 
-<p class="verse">In silvis lépŏres, in verbis quere lepṓres></p>
+<p class="verse">In silvis lépŏres, in verbis quere lepṓres.</p>
 
 This project was a spin-off of my [dissertation](https://www.proquest.com/pqdtglobal/docview/303973630/9A827BAAD2714CA6PQ/3) on the 13th-century Anglo-Latin poet Henry of Avranches, who compiled two sets of *versus differentiales*. The idea was to compare Henry's *Comoda gramatice* and *Tractatus* with John of Garland's *Accentarium*, and draw some conclusions about the relations between the two poets. That project stalled in the mid-1990s and my career trajectory since then is not likely to lead to its completion. Instead, in the hope of entertaining and edifying, and of getting at last some value out of that unfinished work, I set up a [Twitter bot](https://twitter.com/pabinkley/status/296672369156698112) in 2013 to tweet one of these little verses daily and post them to this site. Here I've included the apparatus of references, such as it is, but I can't now guarantee it. The value, if any, is in the verses.
 
