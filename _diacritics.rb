@@ -6,12 +6,7 @@ require 'byebug'
 BREVE = 0
 MACRON = 1
 
-def diacritify(word)
-	# find second-last syllable
-end
-data = CSV.read('_data/versdiff.csv', headers: true)
-
-conversions = {
+CONVERSIONS = {
 	"a"=>["ă", "ā"], 
 	"e"=>["ĕ", "ē"], 
 	"i"=>["ĭ", "ī"], 
@@ -26,37 +21,56 @@ conversions = {
 	"Y"=>["Y", "Ȳ"]
 }
 
+def diacritify(term, diacritic)
+	syllables = ('|' + term).split(/([^aeiouyAEIOUY]+[aeiouyAEIOUY])/).reject { |c| c.empty? }
+	penult = (syllables.last.match?(/.*[aeiouyAEIOUY]$/)) ? syllables.count - 2 : syllables.count - 3
+	vowel = syllables[penult].scan(/[aeiouyAEIOUY]/).first
+	if vowel
+		original_syllable = syllables[penult].dup
+		syllables[penult] = original_syllable.sub(vowel, CONVERSIONS[vowel][diacritic])
+		syllables.join[1..-1] # return diacritified term, removing the first char (|)
+	end
+end
+
+data = CSV.read('_data/versdiff.csv', headers: true)
+
 data.each do |verse|
-	next if verse['text'] != verse['textdiacritics']
+	next if verse['text'] != verse['textdiacritics'] # already done
 
 	text = verse['text']
 	next if text.include?('/') # skip multiple-line verses
 
 	tokens = text.strip.split(/(\W)/,-1) # includes words, spaces, and punctuation
+	tokens_down = tokens.map { |t| t = t.downcase }
+
+	# work from last token to previous homonym
 	last = tokens.count - 1
-	while (!tokens[last].match?(/\w+/)) do 
+	while (!tokens[last].match?(/\w+/)) do # find last token that is a word
 		last -= 1
 	end
 
 	prevs = []
 	i = 0
 	while (i < last) do
-		prevs << i if tokens[i] == tokens[last]
+		prevs << i if tokens_down[i] == tokens_down[last]
 		i += 1	
 	end
-	next if prevs.count != 1
-
-	term = tokens[last]
-	syllables = term.split(/([^aeiouyAEIOUY]+[aeiouyAEIOUY])/).reject { |c| c.empty? }
-	penult = (syllables.last.match?(/.*[aeiouyAEIOUY]$/)) ? syllables.count - 2 : syllables.count - 3
-	vowel = syllables[penult].scan(/[aeiouyAEIOUY]/).first
-	original_syllable = syllables[penult].dup
-
-	syllables[penult] = original_syllable.sub(vowel, conversions[vowel][BREVE])
-	tokens[prevs.first] = syllables.join
-	syllables[penult] = original_syllable.sub(vowel, conversions[vowel][MACRON])
-	tokens[last] = syllables.join
-
+	if prevs.count == 1
+		tokens[last] = diacritify(tokens[last], MACRON)
+		tokens[prevs.first] = diacritify(tokens[prevs.first], BREVE)
+	elsif tokens[0].gsub(/[^aeiouyAEIOUY]/, '').length != 1 # if first token is not a monosyllable
+		# work from first token to later homonym
+		nexts = []
+		i = 1
+		while (i < last) do
+			nexts << i if tokens_down[i] == tokens_down[0]
+			i += 1	
+		end
+		if nexts.count == 1
+			tokens[0] = diacritify(tokens[0], BREVE)
+			tokens[nexts.first] = diacritify(tokens[nexts.first], MACRON)
+		end
+	end
 	verse['textdiacritics'] = tokens.join
 end
 
